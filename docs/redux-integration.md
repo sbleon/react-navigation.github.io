@@ -45,6 +45,7 @@ import {
 import {
   createReduxBoundAddListener,
   createReactNavigationReduxMiddleware,
+  initializeListeners
 } from 'react-navigation-redux-helpers';
 import { Provider, connect } from 'react-redux';
 import React from 'react';
@@ -73,6 +74,10 @@ const middleware = createReactNavigationReduxMiddleware(
 const addListener = createReduxBoundAddListener("root");
 
 class App extends React.Component {
+  componentDidMount() {
+    initializeListeners('root', this.props.nav);
+  }
+
   render() {
     return (
       <AppNavigator navigation={addNavigationHelpers({
